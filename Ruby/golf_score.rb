@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # 18ホールの規定打数
 par = gets.split(',').map(&:to_i)
 
@@ -6,29 +8,24 @@ attempt = gets.split(',').map(&:to_i)
 
 score = []
 
-(0..17).each do |hole|
-  par_of_hole = par[hole]
-  attempt_of_hole = attempt[hole]
-  gap = attempt_of_hole.to_i - par_of_hole.to_i
+SCORE_MAPPING = {
+  1 => 'ボギー',
+  0 => 'パー',
+  -1 => 'バーディ',
+  -2 => 'イーグル',
+  -3 => 'アルバトロス',
+  -4 => 'コンドル'
+}
 
-  if gap >= 2
-    score << gap.to_s + 'ボギー'
-  elsif gap == 1
-    score << 'ボギー'
-  elsif gap.zero?
-    score << 'パー'
-  elsif gap == -1
-    score << 'バーディ'
-  elsif gap == -2 && attempt_of_hole != 1
-    score << 'イーグル'
-  elsif gap == -3 && attempt_of_hole != 1
-    score << 'アルバトロス'
-  elsif par_of_hole == 5 && attempt_of_hole == 1
-    score << 'コンドル'
-  elsif attempt_of_hole == 1
-    score << 'ホールインワン'
-  end
-
+par.zip(attempt) do |a, b|
+  gap = b - a
+  score << if [3, 4].include?(a) && b == 1
+             'ホールインワン'
+           elsif gap >= 2
+             "#{gap}ボギー"
+           else
+             SCORE_MAPPING[gap]
+           end
 end
 
 puts score.join(',')
