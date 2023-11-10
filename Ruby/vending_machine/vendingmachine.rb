@@ -18,7 +18,8 @@ class Vendingmachine
   def buy(drink_name, suica)
     select_drink = @juices.find { |juice| juice.name == drink_name }
 
-    raise 'Error' unless select_drink && select_drink.price <= suica.money && select_drink.amount > 0
+    raise 'charge Error' unless select_drink && select_drink.price <= suica.money
+    raise 'amount Error' unless select_drink.amount > 0
 
     select_drink.reduce_stock
     @total_sales += select_drink.price

@@ -1,12 +1,9 @@
 
 class Suica
+  attr_reader :money
 
   def initialize
     @money = 500
-  end
-
-  def money
-    @money
   end
 
   def money=(new_money)
