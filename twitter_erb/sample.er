@@ -1,0 +1,86 @@
+[users] {bgcolor: "#d0e0d0"}
+  *id {label: "char, uniq"}
+  phone_number {label: "integer, uniq"}
+  email {label: "varchar, uniq" }
+  name {label: "varchar"}
+  introduce {label: "text"}
+  location {label: "text"}
+  website {label: "varchar"}
+  profile_image {label: "text"}
+  avatar_image {label: "text"}
+  created_at { label: "date"}
+  updated_at { label: "date"}
+
+[posts] {bgcolor: "#d0e0d0"}
+  *id {label: "char, uniq"}
+  user_id {label: "FK(users)"}
+  content {label: "varchar(140)"}
+  created_at { label: "date"}
+  updated_at { label: "date"}
+
+[likes] {bgcolor: "#d0e0d0"}
+  *id {label: "char, uniq"}
+  post_id {label: "FK(posts)"}
+  user_id {label: "FK(users)"}
+  created_at { label: "date"}
+  updated_at { label: "date"}
+
+[retweets] {bgcolor: "#d0e0d0"}
+  *id {label: "char, uniq"}
+  post_id {label: "FK(posts)"}
+  user_id {label: "FK(users)"}
+  created_at {label: "date"}
+  updated_at {label: "date"}
+
+[follows] {bgcolor: "#d0e0d0"}
+  *id {label: "char, uniq"}
+  user_id {label: "FK(users)"}
+  user_id {label: "FK(users)"}
+  created_at {label: "date"}
+  updated_at {label: "date"}
+
+[messages] {bgcolor: "#d0e0d0"}
+  *id {label: "char, uniq"}
+  user_id {label: "FK(users)"}
+  user_id {label: "FK(users)"} 
+  content {label: "text"}
+  created_at {label: "date"}
+  updated_at {label: "date"}
+
+[bookmarks] {bgcolor: "#d0e0d0"}
+  *id {label: "char, uniq"}
+  post_id {label: "FK(posts)"}
+  user_id {label: "FK(users)"}
+  created_at {label: "date"}
+  updated_at {label: "date"}
+
+[notifications] {bgcolor: "#d0e0d0"}
+  *id {label: "char, uniq"}
+  user_id {label: "FK(users)"}
+  liked_user_id {label: "FK(users)"}
+  liked_post_id {label: "FK(posts)"}
+  follow_user_id {label: "FK(users)"}
+  created_at {label: "date"}
+  updated_at {label: "date"}
+
+
+
+
+# Cardinality    Syntax
+# 0 or 1         ?
+# exactly 1      1
+# 0 or more      *
+# 1 or more      +
+
+users 1--* `posts`
+users 1--* `likes`
+users 1--* `retweets`
+users 1--* `follows`
+users 1--* `messages`
+users 1--* `bookmarks`
+users 1--* `notifications`
+
+posts 1--* `likes`
+posts 1--* `retweets`
+posts 1--* `bookmarks`
+posts 1--* `notifications`
