@@ -34,15 +34,15 @@
 
 [follows] {bgcolor: "#d0e0d0"}
   *id {label: "char, uniq"}
-  user_id {label: "FK(users)"}
-  user_id {label: "FK(users)"}
+  follower_id {label: "FK(users)"}
+  follower_id {label: "FK(users)"}
   created_at {label: "date"}
   updated_at {label: "date"}
-
+  
 [messages] {bgcolor: "#d0e0d0"}
   *id {label: "char, uniq"}
-  user_id {label: "FK(users)"}
-  user_id {label: "FK(users)"} 
+  sender_id {label: "FK(users)"}
+  recipient_id {label: "FK(users)"} 
   content {label: "text"}
   created_at {label: "date"}
   updated_at {label: "date"}
